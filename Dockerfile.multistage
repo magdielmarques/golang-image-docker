@@ -1,0 +1,24 @@
+# docker build -t magdielmarques/codeeducation:latest -f Dockerfile.multistage . 
+# docker run --rm -it --name golang  magdielmarques/codeeducation  
+
+# stage 1
+FROM golang:1.8 AS builder
+
+WORKDIR $gopath/hello
+
+COPY hello.go . 
+
+RUN go build -o hello.go .
+
+RUN rm -rf go
+
+## stage 2
+FROM alpine:latest  
+
+WORKDIR /app
+
+COPY --from=builder $gopath/hello .
+
+EXPOSE 3000
+
+CMD ./hello.go
