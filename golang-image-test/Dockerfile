@@ -1,5 +1,6 @@
 # docker run --rm -it --name golang golang bash
 # docker run --rm --name teste magdielmarques/teste
+# docker build -t magdielmarques/fullcycle .
 FROM golang:1.8 AS builder
 
 WORKDIR $gopath/hello
