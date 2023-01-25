@@ -10,14 +10,12 @@ COPY hello.go .
 
 RUN go build -o hello.go .
 
-RUN rm -rf go
-
 ## stage 2
 FROM alpine:latest  
 
 WORKDIR /app
 
-COPY --from=builder $gopath/hello .
+COPY --from=builder $gopath/hello/hello.go .
 
 EXPOSE 3000
 
